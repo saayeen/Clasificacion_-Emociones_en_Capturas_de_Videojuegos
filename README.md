@@ -42,16 +42,16 @@ LIBRERIAS NECESARIAS
   Para correr el codigo se necesitan estas librerias de Python:
    
   pip install tensorflow opencv-python numpy matplotlib seaborn scikit-learn pillow
-   
-  - tensorflow / keras: para armar, entrenar y cargar los modelos
-  - opencv-python (cv2): para dibujar la prediccion sobre la imagen y pasar a
-    blanco y negro en el experimento de color
-  - numpy: manejo de imagenes como arrays
-  - matplotlib: graficos y visualizaciones
-  - seaborn: matrices de confusion
-  - scikit-learn: metricas (matriz de confusion, classification report, class
-    weights)
-  - Pillow (PIL): abrir y manipular imagenes
+    
+   - tensorflow / keras: para armar, entrenar y cargar los modelos
+   - opencv-python (cv2): para dibujar la prediccion sobre la imagen y pasar a
+     blanco y negro en el experimento de color
+   - numpy: manejo de imagenes como arrays
+   - matplotlib: graficos y visualizaciones
+   - seaborn: matrices de confusion
+   - scikit-learn: metricas (matriz de confusion, classification report, class
+     weights)
+   - Pillow (PIL): abrir y manipular imagenes
    
   El proyecto se entreno en Google Colab usando GPU. Si solo se quiere hacer
   inferencia con un modelo ya entrenado no hace falta GPU, se puede correr en
@@ -80,6 +80,7 @@ La funcion dibujar_prediccion_cv2() escribe la emocion predicha y el porcentaje
 de confianza directamente sobre los pixeles de la imagen, usando solo OpenCV:
  
 def dibujar_prediccion_cv2(img_path, pred, conf):
+    
     img = cv2.imread(str(img_path))
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     texto = f"{pred.upper()} ({conf:.1%})"
@@ -88,18 +89,10 @@ def dibujar_prediccion_cv2(img_path, pred, conf):
     return img
 
     
-  EJEMPLO DE INFERENCIA
+EJEMPLO DE INFERENCIA
    
- La funcion dibujar_prediccion_cv2() escribe la emocion predicha y el porcentaje
- de confianza directamente sobre los pixeles de la imagen, usando solo OpenCV:
-  
- def dibujar_prediccion_cv2(img_path, pred, conf):
-     img = cv2.imread(str(img_path))
-     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-     texto = f"{pred.upper()} ({conf:.1%})"
-     cv2.rectangle(img, (10, 10), (400, 60), (0, 0, 0), -1)
-     cv2.putText(img, texto, (20, 45), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-     return img
+Ver imagen: example_inference.png
+(prediccion del modelo v2 sobre una imagen nueva, que no es parte del dataset)
    
    
 EVALUACION CON DATOS NUEVOS
@@ -110,9 +103,9 @@ EVALUACION CON DATOS NUEVOS
   texto dentro del notebook.
    
   Principales conclusiones:
-  - El modelo v2 (con augmentation avanzado) fue el que mejor resultado dio en
-    general (55.0% de accuracy).
-  - La emocion serenity es la que el modelo reconoce mejor en los tres modelos.
-  - La emocion sadness es la mas dificil, se confunde bastante con happiness.
-  - El modelo parece fijarse mas en las formas y estructuras de la imagen que en
-    el color para decidir la emocion.
+      - El modelo v2 (con augmentation avanzado) fue el que mejor resultado dio en
+        general (55.0% de accuracy).
+      - La emocion serenity es la que el modelo reconoce mejor en los tres modelos.
+      - La emocion sadness es la mas dificil, se confunde bastante con happiness.
+      - El modelo parece fijarse mas en las formas y estructuras de la imagen que en
+        el color para decidir la emocion.
