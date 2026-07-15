@@ -1,3 +1,5 @@
+Integrantes del grupo: Silvana Araya, Valentina Martinez, Sayen Barra
+
 CLASIFICACION DE EMOCIONES EN VIDEOJUEGOS CON RESNET50V2
  
 DESCRIPCION DEL PROYECTO
