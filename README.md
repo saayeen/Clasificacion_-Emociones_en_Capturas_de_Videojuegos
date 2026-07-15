@@ -75,20 +75,6 @@ CLASIFICACION DE EMOCIONES EN VIDEOJUEGOS CON RESNET50V2
      dibujar_prediccion_cv2) sobre las imagenes de prueba.
    
    
-  PIPELINE DE INFERENCIA
-   
-  La funcion dibujar_prediccion_cv2() escribe la emocion predicha y el porcentaje
-  de confianza directamente sobre los pixeles de la imagen, usando solo OpenCV:
-   
-  def dibujar_prediccion_cv2(img_path, pred, conf):
-      img = cv2.imread(str(img_path))
-      img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-      texto = f"{pred.upper()} ({conf:.1%})"
-      cv2.rectangle(img, (10, 10), (400, 60), (0, 0, 0), -1)
-      cv2.putText(img, texto, (20, 45), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-      return img
-   
-   
   EJEMPLO DE INFERENCIA
    
   Ver imagen: example_inference.png
