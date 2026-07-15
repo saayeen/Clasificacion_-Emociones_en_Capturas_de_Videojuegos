@@ -1,6 +1,6 @@
 CLASIFICACION DE EMOCIONES EN VIDEOJUEGOS CON RESNET50V2
  
-  DESCRIPCION DEL PROYECTO
+DESCRIPCION DEL PROYECTO
    
   Este proyecto consiste en un clasificador de imagenes que reconoce 5 emociones
   (anger, fear, happiness, sadness, serenity) a partir de capturas de videojuegos.
@@ -25,7 +25,7 @@ CLASIFICACION DE EMOCIONES EN VIDEOJUEGOS CON RESNET50V2
   para ver que tan bien generaliza.
    
    
-  ESTRUCTURA DEL DATASET
+ESTRUCTURA DEL DATASET
    
   games_mood/
     anger/       (200 imagenes)
@@ -37,7 +37,7 @@ CLASIFICACION DE EMOCIONES EN VIDEOJUEGOS CON RESNET50V2
   Se dividio en 80% entrenamiento (800 imagenes) y 20% validacion (200 imagenes).
    
    
-  LIBRERIAS NECESARIAS
+LIBRERIAS NECESARIAS
    
   Para correr el codigo se necesitan estas librerias de Python:
    
@@ -58,7 +58,7 @@ CLASIFICACION DE EMOCIONES EN VIDEOJUEGOS CON RESNET50V2
   cualquier computador con CPU.
    
    
-  COMO EJECUTAR EL PROYECTO
+COMO EJECUTAR EL PROYECTO
    
   1. Clonar el repositorio y tener la carpeta games_mood con el dataset.
   2. Instalar las librerias mencionadas arriba.
@@ -74,14 +74,35 @@ CLASIFICACION DE EMOCIONES EN VIDEOJUEGOS CON RESNET50V2
   6. Correr las funciones de prediccion (predict_emotion_final,
      dibujar_prediccion_cv2) sobre las imagenes de prueba.
    
-   
+PIPELINE DE INFERENCIA
+ 
+La funcion dibujar_prediccion_cv2() escribe la emocion predicha y el porcentaje
+de confianza directamente sobre los pixeles de la imagen, usando solo OpenCV:
+ 
+def dibujar_prediccion_cv2(img_path, pred, conf):
+    img = cv2.imread(str(img_path))
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    texto = f"{pred.upper()} ({conf:.1%})"
+    cv2.rectangle(img, (10, 10), (400, 60), (0, 0, 0), -1)
+    cv2.putText(img, texto, (20, 45), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+    return img
+
+    
   EJEMPLO DE INFERENCIA
    
-  Ver imagen: example_inference.png
-  (prediccion del modelo v2 sobre una imagen nueva, que no es parte del dataset)
+ La funcion dibujar_prediccion_cv2() escribe la emocion predicha y el porcentaje
+ de confianza directamente sobre los pixeles de la imagen, usando solo OpenCV:
+  
+ def dibujar_prediccion_cv2(img_path, pred, conf):
+     img = cv2.imread(str(img_path))
+     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+     texto = f"{pred.upper()} ({conf:.1%})"
+     cv2.rectangle(img, (10, 10), (400, 60), (0, 0, 0), -1)
+     cv2.putText(img, texto, (20, 45), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+     return img
    
    
-  EVALUACION CON DATOS NUEVOS
+EVALUACION CON DATOS NUEVOS
    
   Se probo el modelo con imagenes externas al dataset, que no se usaron ni en
   entrenamiento ni en validacion. El analisis de estos resultados, junto con la
